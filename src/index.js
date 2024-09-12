@@ -3,6 +3,11 @@ import mysql2 from "mysql2/promise";
 export class DatabaseORM {
     #connection;
 
+    /**
+     * make the connection with database
+     * @param connection string | object
+     * @description receives url or an object { username, host, port, password, database } 
+     */
     constructor(connection) {
         if (typeof connection == 'string') {
             this.#connection = mysql2.createPool(connection);
@@ -13,6 +18,11 @@ export class DatabaseORM {
         }
     }
 
+    /**
+     * queries the database and returns all records of a table
+     * @param {*} queries { table: string, where?: object }
+     * @returns array of objects
+     */
     async findAll(queries) {
         const { table, where } = queries;
 
@@ -32,6 +42,11 @@ export class DatabaseORM {
         }
     }
 
+    /**
+     * queries the database and returns the first record found
+     * @param {*} queries { table: string, where: object }
+     * @returns an object
+     */
     async findFirst(queries) {
         const { table, where } = queries;
         const queriesArr = [];
@@ -45,6 +60,11 @@ export class DatabaseORM {
         return result[0];
     }
 
+    /**
+     * creates a new record in database
+     * @param {*} queries { table: string, data: object, field?: string }
+     * @returns nothing or an object
+     */
     async create(queries) {
         const { table, data, field } = queries;
 
@@ -68,6 +88,12 @@ export class DatabaseORM {
         }
     }
 
+    /**
+     * updates a record of a table
+     * @param {*} queries { table: string, data: object, where: object, field?: string }
+     * @description only updates one record
+     * @returns nothing or an object
+     */
     async update(queries) {
         const { table, where, data, field } = queries;
 
@@ -99,6 +125,12 @@ export class DatabaseORM {
         }
     }
 
+    /**
+     * deletes a record of a table
+     * @param {*} queries { table: string, where: object, field?: string }
+     * @description only deletes one record
+     * @returns nothing or an object
+    */
     async delete(queries) {
         const { table, where, field } = queries;
         const queriesArr = [];
@@ -123,6 +155,12 @@ export class DatabaseORM {
         }
     }
 
+    /**
+     * deletes all records of a table
+     * @param {*} queries { table: string, where: object, field?: string }
+     * @description deletes all records that satisfy the where
+     * @returns nothing or an object
+    */
     async deleteAll(queries) {
         const { table, where } = queries;
         const queriesArr = [];
