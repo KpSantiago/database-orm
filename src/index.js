@@ -62,6 +62,37 @@ export class DatabaseORM {
         }
     }
 
+    async update(queries) {
+        const { table, where, data, field } = queries;
+
+        const setQueriesArr = [];
+        for (const key in data) {
+            if (Object.prototype.hasOwnProperty.call(data, key)) {
+                setQueriesArr.push(`${key} = "${data[key]}"`);
+            }
+        }
+
+        const queriesArr = [];
+
+        for (const key in where) {
+            queriesArr.push(`${key} = "${where[key]}"`);
+        }
+
+        const whereQuery = queriesArr.toString();
+        const setQuery = setQueriesArr.toString();
+        if (!field || field == 'all') {
+            const result = await this.#connection.query(`UPDATE ${table} SET ${setQuery} WHERE ${whereQuery} LIMIT 1`);
+            const getFields = await this.findFirst({ table, where });
+
+            return { changed_items: result[0].changedRows, data: getFields[0] };
+        } else {
+            const result = await this.#connection.query(`UPDATE ${table} SET ${setQuery} WHERE ${whereQuery} LIMIT 1`);
+            const getFields = await this.findFirst({ table, where });
+
+            return { changed_items: result[0].changedRows, data: { [field]: getFields[0][field] } };
+        }
+    }
+
     async delete(queries) {
         const { table, where, field } = queries;
         const queriesArr = [];
