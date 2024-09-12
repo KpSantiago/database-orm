@@ -4,7 +4,13 @@ export class DatabaseORM {
     #connection;
 
     constructor(connection) {
-        this.#connection = mysql2.createPool(connection);
+        if (typeof connection == 'string') {
+            this.#connection = mysql2.createPool(connection);
+        } else {
+            const { username, host, port, password, database } = connection;
+
+            this.#connection = mysql2.createPool(`mysql://${username}${password ? ':' + password : ''}@${host}:${port}/${database}`);
+        }
     }
 
     async findAll(queries) {
