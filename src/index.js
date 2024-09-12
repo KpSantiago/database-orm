@@ -174,4 +174,32 @@ export class DatabaseORM {
 
         return { deleted_items: result[0].affectedRows };
     }
+
+    /**
+     * Queries the database with a manually written query
+     * @param {*} query string
+     * @description the query doesn't accept a DELETE query
+     * @returns the results of the query
+    */
+    async query(query) {
+        if (!query.includes("DELETE")) {
+            const result = await this.#connection.query(query);
+
+            return result[0];
+        } else {
+            throw new Error("This method cannot use a unsefe query. Use the unsafe method");
+        }
+    }
+
+     /**
+     * Queries the database with a manually written query that can be unsafe
+     * @param {*} query string
+     * @description this method accpets the DELETE query
+     * @returns the results of the query
+    */
+    async unsafeQuery(query) {
+        const result = await this.#connection.query(query);
+
+        return result[0];
+    }
 }
