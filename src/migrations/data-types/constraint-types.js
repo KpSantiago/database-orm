@@ -7,6 +7,7 @@ export const constraint = (constraint, value) => {
         primaryKey: value ? ' PRIMARY KEY ' : '',
         default: MySQLDataTypes[value] ? ' DEFAULT ' + MySQLDataTypes[value] : ' DEFAULT ' + value + ' ',
         autoIncrement: value ? ' AUTO_INCREMENT ' : '',
+        after: value ? ' AFTER ' + value : '',
     }
 
     return types[constraint];
