@@ -5,7 +5,7 @@ export class DatabaseORM {
 
     /**
      * make the connection with database
-     * @param connection string | object
+     * @param { string | object } connection
      * @description receives url or an object { username, host, port, password, database } 
      */
     constructor(connection) {
@@ -20,7 +20,7 @@ export class DatabaseORM {
 
     /**
      * queries the database and returns all records of a table
-     * @param {*} queries { table: string, where?: object }
+     * @param { { table: string, where?: object } } queries 
      * @returns array of objects
      */
     async findAll(queries) {
@@ -44,7 +44,7 @@ export class DatabaseORM {
 
     /**
      * queries the database and returns the first record found
-     * @param {*} queries { table: string, where: object }
+     * @param { { table: string, where: object } } queries 
      * @returns an object
      */
     async findFirst(queries) {
@@ -62,8 +62,8 @@ export class DatabaseORM {
 
     /**
      * creates a new record in database
-     * @param {*} queries { table: string, data: object, field?: string }
-     * @returns nothing or an object
+     * @param { { table: string, data: object, field?: string } } queries
+     * @returns array or an object
      */
     async create(queries) {
         const { table, data, field } = queries;
@@ -90,9 +90,9 @@ export class DatabaseORM {
 
     /**
      * updates a record of a table
-     * @param {*} queries { table: string, data: object, where: object, field?: string }
+     * @param { { table: string, data: object, where: object, field?: string } } queries
      * @description only updates one record
-     * @returns nothing or an object
+     * @returns a object
      */
     async update(queries) {
         const { table, where, data, field } = queries;
@@ -127,7 +127,7 @@ export class DatabaseORM {
 
     /**
      * deletes a record of a table
-     * @param {*} queries { table: string, where: object, field?: string }
+     * @param { { table: string, where: object, field?: string } } queries
      * @description only deletes one record
      * @returns nothing or an object
     */
@@ -157,9 +157,9 @@ export class DatabaseORM {
 
     /**
      * deletes all records of a table
-     * @param {*} queries { table: string, where: object, field?: string }
+     * @param { { table: string, where: object, field?: string } } queries
      * @description deletes all records that satisfy the where
-     * @returns nothing or an object
+     * @returns object
     */
     async deleteAll(queries) {
         const { table, where } = queries;
@@ -177,7 +177,7 @@ export class DatabaseORM {
 
     /**
      * Queries the database with a manually written query
-     * @param {*} query string
+     * @param { string } query 
      * @description the query doesn't accept a DELETE query
      * @returns the results of the query
     */
@@ -193,7 +193,7 @@ export class DatabaseORM {
 
      /**
      * Queries the database with a manually written query that can be unsafe
-     * @param {*} query string
+     * @param { string } query
      * @description this method accpets the DELETE query
      * @returns the results of the query
     */
