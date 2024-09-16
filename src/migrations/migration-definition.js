@@ -1,21 +1,21 @@
 import mysql2 from "mysql2/promise";
 import { constraint as constraintTypes } from "./data-types/constraint-types.js";
+import { MySQLDataTypes } from "./data-types/MySQLDataTypes.js";
 
 export class Migration {
-    #connnection;
+    #connection;
 
     /**
      * make the connection with database
-     * @param connection string | object
-     * @description receives url or an object { username, host, port, password, database } 
+     * @param { string | { username: string, host: string, port: string | number, password: string, database: string } } connection
      */
     constructor(connection) {
         if (typeof connection == 'string') {
-            this.#connnection = mysql2.createPool(connection);
+            this.#connection = mysql2.createPool(connection);
         } else {
             const { username, host, port, password, database } = connection;
 
-            this.#connnection = mysql2.createPool(`mysql://${username}${password ? ':' + password : ''}@${host}:${port}/${database}`);
+            this.#connection = mysql2.createPool(`mysql://${username}${password ? ':' + password : ''}@${host}:${port}/${database}`);
         }
     }
 
@@ -44,7 +44,7 @@ export class Migration {
             );
         `;
 
-        const result = await this.#connnection.query(query);
+        const result = await this.#connection.query(query);
 
         return result;
     }
@@ -57,7 +57,7 @@ export class Migration {
     async dropTable(tableName) {
         const query = `DROP TABLE IF EXISTS ${tableName}`;
 
-        const result = await this.#connnection.query(query);
+        const result = await this.#connection.query(query);
 
         return result;
     }
@@ -71,7 +71,7 @@ export class Migration {
     async renameTable(tableName, newTableName) {
         const query = `RENAME TABLE ${tableName} TO ${newTableName};`;
 
-        const result = await this.#connnection.query(query);
+        const result = await this.#connection.query(query);
 
         return result;
     }
@@ -101,7 +101,7 @@ export class Migration {
             query += ';'
         }
 
-        const result = await this.#connnection.query(query);
+        const result = await this.#connection.query(query);
 
         return result;
     }
@@ -131,7 +131,7 @@ export class Migration {
             }
         }
 
-        const result = await this.#connnection.query(query);
+        const result = await this.#connection.query(query);
 
         return result;
     }
@@ -145,7 +145,7 @@ export class Migration {
     async dropColumn(tableName, columnName) {
         const query = `ALTER TABLE ${tableName} DROP ${columnName}`;
 
-        const result = await this.#connnection.query(query);
+        const result = await this.#connection.query(query);
 
         return result;
     }

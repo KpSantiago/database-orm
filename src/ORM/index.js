@@ -56,7 +56,7 @@ export class DatabaseORM {
         }
 
         const whereQueries = queriesArr.toString().replace(/[\,]/g, ' AND ');
-        const result = await this.#connection.query(`SELECT * FROM ${table} WHERE ${whereQueries}`);
+        const result = await this.#connection.query(`SELECT * FROM ${table} WHERE ${whereQueries} LIMIT 1`);
         return result[0];
     }
 
