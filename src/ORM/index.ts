@@ -1,5 +1,4 @@
 import mysql2, { FieldPacket, ResultSetHeader } from "mysql2/promise";
-import { Connection } from "..";
 
 type QuerieObject = {
     [x: string]: string | number
@@ -214,7 +213,3 @@ export class DatabaseORM {
         return result[0];
     }
 }
-
-const orm = new Connection("mysql://root@localhost:3306/visitas").databaseORM;
-
-orm.findFirst({ table: "users", where: { id: 1 } }).then(d => console.log(d));
