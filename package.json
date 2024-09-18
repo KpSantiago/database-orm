@@ -1,11 +1,13 @@
 {
   "name": "connection-database-only-nodejs",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "orm:init": "node src/migrations/configuration.js",
-    "migration:create": "node src/migrations/create.js",
-    "migration:run": "node ./databaseORM/migrations/*.js"
+    "orm:init": "node dist/migrations/config.js",
+    "migrate:create": "node dist/migrations/create.js",
+    "migrate": "node ./distatabaseORM/migrations/migrations.ts",
+    "build": "tsc --declaration"
   },
   "keywords": [],
   "author": "",
