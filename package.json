@@ -1,12 +1,12 @@
 {
   "name": "@kpsantiago/database-orm",
-  "version": "1.0.0",
+  "version": "1.0.0.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "orm:init": "node dist/migrations/config.js",
-    "migrate:create": "node dist/migrations/create.js",
-    "migrate": "node ./distatabaseORM/migrations/migrations.ts",
+    "orm init": "node dist/migrations/config.js",
+    "orm migrate create": "node dist/migrations/create.js",
+    "orm migrate": "node ./distatabaseORM/migrations/migrations.ts",
     "build": "tsc --declaration"
   },
   "keywords": [],
