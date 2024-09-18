@@ -1,0 +1,23 @@
+{
+  "name": "connection-database-only-nodejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "orm:init": "node src/migrations/configuration.js",
+    "migration:create": "node src/migrations/create.js",
+    "migration:run": "node ./databaseORM/migrations/*.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/node": "^22.5.5",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.11.3"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.2"
+  }
+}
