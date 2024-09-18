@@ -1,4 +1,4 @@
-// import { Migration } from "./migrations/migration-definition";
+import { Migration } from "./migrations/migration-definition";
 import { DatabaseORM } from "./ORM/index";
 import mysql2 from "mysql2/promise";
 
@@ -27,9 +27,9 @@ export class Connection {
         }
     }
 
-    // get migration() {
-    //     return new Migration(this.connection);
-    // }
+    get migration() {
+        return new Migration(this.connection);
+    }
 
     get databaseORM() {
         return new DatabaseORM(this.connection);
