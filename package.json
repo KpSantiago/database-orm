@@ -7,9 +7,6 @@
   },
   "types": "dist/index.d.ts",
   "scripts": {
-    "orm init": "node dist/migrations/config.js",
-    "orm migrate create": "node dist/migrations/create.js",
-    "orm migrate": "node ./distatabaseORM/migrations/migrations.ts",
     "build": "tsc --declaration"
   },
   "keywords": [],
